@@ -78,6 +78,22 @@ app.get('/movies/read/by-title', (req, res) => {
     })
 })
 
+
+app.get('/movies/read/id/:id', (req, res) => {
+    let id = req.params.id
+    if (id) {
+        if (id < movies.length) {
+            res.json({status:200,data:movies[id]})
+        }
+        else if(id == null || id=== undefined) {
+            res.json({status:404,error:"You didnt add an id!"})
+        }
+        else{
+            res.status(404).json({status:404,error:true, message:"the movie " +id+ " does not exist"} )
+        }
+    }
+})
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
