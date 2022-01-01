@@ -134,6 +134,29 @@ res.json ({status:200, data:movies})}
 })
 
 
+
+//Step-10
+app.get('/movies/update/:ID', (req, res) => {
+    var titlex = req.query.title;
+    var yearx = req.query.year;
+    var ratingx = req.query.rating;
+if(!req.query.title){
+    var titlex=movies[req.params.ID].title
+}
+if(!req.query.rating){
+    var ratingx=movies[req.params.ID].rating
+}
+if(!req.query.year){
+    var yearx=movies[req.params.ID].year
+}
+    movies[req.params.ID] = { title: titlex, year: yearx, rating: ratingx };
+    res.json({ status: 200, data: movies })
+
+})
+
+
+
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
