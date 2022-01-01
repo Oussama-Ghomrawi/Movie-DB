@@ -11,9 +11,13 @@ const movies = [
     { title: 'الإرهاب والكباب', year: 1992, rating: 6.2 }
 ]
 
+
+//Step-2
 app.get('/', (req, res) => {
   res.send('ok')
 })
+
+//Step-3
 app.get('/test',(req,res)=>{
     res.json({"status":200,"message":"ok"})
 })
@@ -21,7 +25,7 @@ app.get('/time',(req,res)=>{
     res.json({"status":200,"message":time})
 })
 
-
+//Step-4
 app.get('/hello/:ID', (req, res) => {
     res.json({ "status": 200, "message": "hello " + req.params.ID })
 })
@@ -46,17 +50,16 @@ app.get('/search', (req, res) => {
     }
 });
 
-
+//Step-5
 app.get('/movies/read', (req, res) => {
     res.json({ "status": 200, "message": movies })
 })
 app.get('/movies/update', (req, res) => {
 })
-app.get('/movies/delete', (req, res) => {
-})
 
 
 
+//Step-6
 app.get('/movies/read/by-date',(req,res)=>{
     res.json({"status":200,"data":movies.sort(function(a, b){return a.year - b.year})})
 })
@@ -78,6 +81,8 @@ app.get('/movies/read/by-title', (req, res) => {
 })
 
 
+
+//Step-7
 app.get('/movies/read/id/:id', (req, res) => {
     let id = req.params.id
     if (id) {
@@ -94,7 +99,7 @@ app.get('/movies/read/id/:id', (req, res) => {
 })
 
 
-
+//step-8
 app.get('/movies/create', (req, res) => {
     if (!req.query.rating){
         req.query.rating=4;
@@ -116,6 +121,17 @@ app.get('/movies/create', (req, res) => {
 })
 
 
+
+//step-9
+app.get('/movies/delete/:ID', (req, res)=> {
+let deletedmovie=req.params.ID
+if (movies.length<deletedmovie){
+res.json({status:404, error:true, message:'the movie <ID> does not exist'})
+}
+else{
+movies.splice(deletedmovie, 1)
+res.json ({status:200, data:movies})}
+})
 
 
 app.listen(port, () => {
