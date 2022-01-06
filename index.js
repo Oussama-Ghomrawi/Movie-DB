@@ -54,8 +54,7 @@ app.get('/search', (req, res) => {
 app.get('/movies/read', (req, res) => {
     res.json({ "status": 200, "message": movies })
 })
-app.get('/movies/update', (req, res) => {
-})
+
 
 
 
@@ -100,7 +99,7 @@ app.get('/movies/read/id/:id', (req, res) => {
 
 
 //step-8
-app.get('/movies/create', (req, res) => {
+app.post('/movies/create', (req, res) => {
     if (!req.query.rating){
         req.query.rating=4;
     }
@@ -123,7 +122,7 @@ app.get('/movies/create', (req, res) => {
 
 
 //step-9
-app.get('/movies/delete/:ID', (req, res)=> {
+app.delete('/movies/delete/:ID', (req, res)=> {
 let deletedmovie=req.params.ID
 if (movies.length<deletedmovie){
 res.json({status:404, error:true, message:'the movie <ID> does not exist'})
@@ -136,7 +135,7 @@ res.json ({status:200, data:movies})}
 
 
 //Step-10
-app.get('/movies/update/:ID', (req, res) => {
+app.put('/movies/update/:ID', (req, res) => {
     var titlex = req.query.title;
     var yearx = req.query.year;
     var ratingx = req.query.rating;
